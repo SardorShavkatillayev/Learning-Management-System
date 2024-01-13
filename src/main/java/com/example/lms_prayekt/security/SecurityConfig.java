@@ -24,10 +24,17 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         registry -> registry
-                                .requestMatchers("register/amaliyot","register/jadval","/TableOfDars","/register/loginParol",
-                                        "/lesson","/admin/{id}",
+                                .requestMatchers("register/amaliyot","/register/{id}","register/jadval","/TableOfDars","/register/loginParol",
+                                        "/lesson","/admin/{id}","/test1","/amaliyot/{id}","/files/**","/name/{file}",
+                                        "/{id}","Admin","Time","src/main/resources/files/","/LMS_Prayekt/src/main/resources/files/"
+                                        ,"/login", "/Sciences","/Dars","/register","/student","/register/lessons",
+                                        "register/amaliyot","register/jadval","/TableOfDars","/register/loginParol",
+                                        "/lesson", "/static/css/{id}",
                                         "/{id}","Admin","Time"
-                                        ,"/login", "/Sciences","/Dars","/register","/student")
+                                        ,"/login", "/Sciences","/Dars","/register","/student","student/add-student",
+                                        "student/all-student","/student/{id}","teacher/add-tiacher","teacher/all-teacher",
+                                        "/teacher/{id}","student/update{id}","teacher/update{id}","student/back",
+                                        "teacher/back","teacher/davomat","/teacher/update/{id}")
                                 .permitAll()
                                 .requestMatchers("/car").hasAuthority("car:read")
                                 .anyRequest().authenticated()

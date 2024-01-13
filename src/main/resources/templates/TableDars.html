@@ -11,6 +11,22 @@
     }
 </style>
 <body>
+<li>
+    <a href="/register/lessons" th:method="GET">
+        <i class="menu-icon icon-study"></i>
+        <span>Mening fanlarim</span>
+    </a>
+</li>
+
+<li>
+    <a href="/register/jadval" th:method="GET">
+        <i class="menu-icon fa fa-calendar"></i>
+        <span>Dars jadvali</span>
+    </a>
+</li>
+<br>
+<br>
+<br>
 <table  id="datatable" role="grid" aria-describedby="datatable_info" style="width: 1141px;">
     <thead>
     <tr role="row">
@@ -46,12 +62,12 @@
                class="btn btn-default"
                th:text="${student.getFreeLesson()}" ></a></td>
         <td data-label="Amal">
-            <form th:action="@{/{id}(id=${student.getId()})}" method="post">
+            <form th:action="@{/amaliyot/{id}(id=${student.getId()})}" method="post">
             <button type="submit" class="fa ">-- Amaliyot</button>
             </form>
         </td>
         <td data-label="Reja">
-            <form th:action="@{/{id}(id=${student.getId()})}" method="get">
+            <form th:action="@{/amaliyot/{id}(id=${student.getId()})}" method="get">
                 <button type="submit"    class="btn-default" >-- Mavzu
                 </button>
             </form>

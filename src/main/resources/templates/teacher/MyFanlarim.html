@@ -1,0 +1,74 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mening fanlarim</title>
+</head>
+<body>
+
+
+<form th:action="@{/teacher/file}" th:method="post" enctype="multipart/form-data">
+    <input  name="file" type="file">
+    <button type="submit">Joylash</button>
+</form>
+
+
+<form action="/register" method="get">
+    <button class="button-30" role="button">Back</button>
+</form>
+
+
+
+
+</body>
+</html>-->
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mening fanlarim</title>
+</head>
+<body>
+
+
+
+<table>
+    <thead>
+    <tr>
+        <th>fanlarim</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="scine : ${sci}">
+        <!--        <h1>Kompyuter tarmoqlari</h1>-->
+        <td th:text="${sci.getName()}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<form th:action="@{/teacher/file}" th:method="post" enctype="multipart/form-data">
+    <input name="file" type="file">
+    <button type="submit">Joylash</button>
+</form>
+
+
+
+<form action="/register" method="get">
+    <button class="button-30" role="button">Back</button>
+</form>
+
+</body>
+</html>

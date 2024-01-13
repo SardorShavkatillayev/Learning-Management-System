@@ -2,7 +2,8 @@ package com.example.lms_prayekt.security;
 
 
 import com.example.lms_prayekt.entity.student.controller.StudentRepazitory;
-import com.example.lms_prayekt.entity.teacher.TeacherRepazitory;
+
+import com.example.lms_prayekt.teacher.TeacherRepazitory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

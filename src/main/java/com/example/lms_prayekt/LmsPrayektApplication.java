@@ -10,4 +10,5 @@ public class LmsPrayektApplication {
         SpringApplication.run(LmsPrayektApplication.class, args);
     }
 
+    ///////     koramiz
 }

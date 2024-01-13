@@ -15,11 +15,22 @@ maximum-scale=1.0">
     </style>
 </head>
 <body>
-<form action="/register" method="post">
-   <button type="submit" name="Mening fanlarim" >Mening Fanlarim</button>
-</form>
-<form action="/register/jadval" method="get">
-    <button type="submit" name="Dars jadvali">Dars Jadvali</button>
+
+    <li>
+        <a href="/register/lessons" th:method="GET">
+            <i class="menu-icon icon-study"></i>
+            <span>Mening fanlarim</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="/register/jadval" th:method="GET">
+            <i class="menu-icon fa fa-calendar"></i>
+            <span>Dars jadvali</span>
+        </a>
+    </li>
+<form action="/name" method="get">
+    <button type="submit">Test</button>
 </form>
 </body>
 </html>

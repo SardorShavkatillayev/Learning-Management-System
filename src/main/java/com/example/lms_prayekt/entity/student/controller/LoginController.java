@@ -1,19 +1,27 @@
 package com.example.lms_prayekt.entity.student.controller;
 
-import com.example.lms_prayekt.admin.Admin;
-import com.example.lms_prayekt.admin.repozitary.AdminRepozitary;
+
+import com.example.lms_prayekt.entity.admin.Admin;
+import com.example.lms_prayekt.entity.admin.repozitary.AdminRepozitary;
+import com.example.lms_prayekt.entity.lesson.repozitary.LessonRepozitary;
 import com.example.lms_prayekt.entity.sciences.entity.Sciences;
+import com.example.lms_prayekt.entity.sciences.repozitary.SciencesRepazitory;
 import com.example.lms_prayekt.entity.student.Student;
-import com.example.lms_prayekt.entity.teacher.Teacher;
-import com.example.lms_prayekt.entity.teacher.TeacherRepazitory;
+
+import com.example.lms_prayekt.teacher.Teacher;
+import com.example.lms_prayekt.teacher.TeacherRepazitory;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.*;
 
 @Controller
 @RequestMapping("/register")
@@ -22,10 +30,14 @@ public class LoginController {
     private final StudentRepazitory studentRepazitory;
     private final TeacherRepazitory repazitory;
     private final AdminRepozitary adminrepozitary;
+    private final LessonRepozitary lessonRepozitary;
+    private final SciencesRepazitory sciencesRepazitory;
     private List<Sciences> sciences=new ArrayList<>();
+    private static String loginStudent="";
     @PostMapping("/loginParol")
     public ModelAndView register(@RequestParam("Login")String login, Model model)
     {
+        loginStudent+=login;
         for (Teacher teacher : repazitory.findAll()) {
             if (teacher.getLogin().equals(login))
             {
@@ -43,7 +55,7 @@ public class LoginController {
         else if (byLogin==null ) {
             Admin byLogin1 = adminrepozitary.findByLogin(login);
             model.addAttribute(byLogin1);
-            return new ModelAndView("Admin",model.asMap());
+            return new ModelAndView("lessonAdmin",model.asMap());
         }
         return new ModelAndView("login");
     }
@@ -78,10 +90,11 @@ public class LoginController {
     public ModelAndView jadvalDars( Model model)
     {
         model.addAttribute(sciences);
+
         return new ModelAndView("test",model.asMap());
     }
 
-    @PostMapping
+    @GetMapping("/lessons")
     public ModelAndView getAll(Model model)
     {
         model.addAttribute(sciences);
@@ -92,5 +105,38 @@ public class LoginController {
     {
         model.addAttribute(sciences);
         return new ModelAndView("TableDars",model.asMap());
+    }
+    @Transactional
+    @PostMapping("/{id}")
+    public ModelAndView handleFileUpload(@PathVariable("id") UUID id, @RequestParam("file") File file,Model model) {
+        Student student = studentRepazitory.getByLogin(loginStudent);
+        String directoryPath = "D:\\LMS_Prayekt\\src\\main\\resources\\files";
+        Sciences sciences1 = sciencesRepazitory.findById(id).get();
+        // Saqlanishi kerak bo'lgan fayl nomi
+        String fileName = file.getName();
+
+        // Faylning to'liq manzili
+        String filePath = directoryPath + "/" + fileName;
+         sciences1.setFiles(List.of(new com.example.lms_prayekt.entity.student
+                 .File(UUID.randomUUID(),"Topshiriq-1",fileName, LocalDate.now(),sciences1)));
+        File file1 = new File(filePath);
+        try {
+            // Faylni yaratish
+            if (file1.createNewFile()) {
+                System.out.println("Fayl muvaffaqiyatli yaratildi.");
+            } else {
+                System.out.println("Fayl allaqachon mavjud.");
+            }
+        } catch (IOException e) {
+            System.out.println("Xatolik yuz berdi: " + e.getMessage());
+        }
+        model.addAttribute(sciences1);
+        return new ModelAndView("Lesson",model.asMap());
+    }
+
+    @GetMapping()
+    public ModelAndView gerBack()
+    {
+        return new ModelAndView("Teacher");
     }
 }

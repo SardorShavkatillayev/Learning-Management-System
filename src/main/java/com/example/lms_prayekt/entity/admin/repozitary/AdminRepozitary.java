@@ -1,8 +1,10 @@
-package com.example.lms_prayekt.admin.repozitary;
+package com.example.lms_prayekt.entity.admin.repozitary;
 
-import com.example.lms_prayekt.admin.Admin;
+
+import com.example.lms_prayekt.entity.admin.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 
 import java.util.UUID;
 

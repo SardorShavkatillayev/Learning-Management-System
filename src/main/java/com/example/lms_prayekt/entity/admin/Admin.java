@@ -1,4 +1,4 @@
-package com.example.lms_prayekt.admin;
+package com.example.lms_prayekt.entity.admin;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

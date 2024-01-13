@@ -10,15 +10,14 @@ maximum-scale=1.0">
 <style>
     .table-container {
         display: table-cell;
-        justification-content: center; /* Center the table horizontally */
-        align-elements: center; /* Center the table vertically */
+        justification-content: center;
+        align-elements: center;
     }
 
     table {
         limit-turn: collapse;
         height: 0.1%;
-        width: 60%; /* Adjust width as needed */
-        /* Add other table styles as needed */
+        width: 60%;
     }
 
     th, td {
@@ -94,11 +93,46 @@ maximum-scale=1.0">
     <td>
         Hozirgi bahosi
         <br>
-        <h4  class="m-b-xxs">0</h4>
+        <a class="m-b-xxs"  th:text="${sciences.percentageoftotalscore}"></a>
     </td>
 </tr>
 </tbody>
 </table>
+<table class="table-responsive" >
+    <thead width="1000%"  lang="10%" class="center">
+    <th width="10%">O'qituvchi</th>
+    <th width="10%">Topshiriq</th>
+    <th width="5%">Ball</th>
+    <th width="10%">File</th>
 
+    </thead>
+    <tbody>
+    <tr >
+        <td th:text="${sciences.getTeachers().get(0).getFullname()}"></td>
+        <td th:text="1-topshiriq"></td>
+        <td >
+            <div class="btn-group" role="group" aria-label="marks">
+                <button type="button" class="btn btn-default btn-sm">&nbsp;</button>
+
+                <button type="button" class="btn btn-primary btn-sm">12</button>
+            </div>
+        </td>
+      <td >
+          <div th:each="sciences1:${sciences.getFiles()}">
+          <form th:action="@{/register/{id}(id=${sciences.getId()})}" method="post"
+                th:if="${(sciences1.getDate().isAfter(sciences1.getTaskofDate())) && (sciences1.getFilename()==null)}">
+              <input type="file" name="file" placeholder="file">
+              <button type="submit">Mashqlarni yuborish</button>
+          </form>
+         <a th:if="${(sciences1.getTaskofDate().isAfter(sciences1.getDate())) && (sciences1.getFilename()==null)}"
+            style="color: red">Topshiriq muddati otib ketgan</a>
+         <a th:if="${ (sciences1.getFilename()!=null)}" href="../files/Hujjat%20(4).pdf"
+             th:text="${sciences1.getFilename()}"></a>
+          </div>
+      </td>
+
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

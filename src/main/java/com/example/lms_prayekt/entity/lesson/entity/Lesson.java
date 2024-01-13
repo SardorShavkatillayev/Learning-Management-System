@@ -2,9 +2,11 @@ package com.example.lms_prayekt.entity.lesson.entity;
 
 import com.example.lms_prayekt.entity.sciences.entity.Sciences;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,28 +15,22 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Data
 public class Lesson {
-    @Getter
+
     @Id
     private UUID id;
     private Integer hourOfweek;
     private Integer minutOfweek;
-    @Getter
-    @ManyToOne
+    private String roomname;
+    private Integer dayOfWeek;
+    public void setRoomname(String roomname) {
+        this.roomname = roomname;
+    }
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Sciences sciences;
 
-    public void setTimeOfweek(Integer hourOfweek) {
-        this.hourOfweek = hourOfweek;
-    }
 
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-
-    public void setSciences(Sciences sciences) {
-        this.sciences = sciences;
-    }
 }
